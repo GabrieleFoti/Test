@@ -45,7 +45,7 @@ client.on('ready', () => {
     .catch(console.error)
 })
 
-client.on('guildMemberAdd', (member) => {
+client.on('guildMemberAdd', async (member) => {
   
   console.log('nuovo membro')
   connection.query(`SELECT welcome_msg, welcome_msg_content, welcome_channel_id, welcome_role, welcome_role_id FROM Guild WHERE guild_id = ${member.guild.id}`, (err, results) => {
