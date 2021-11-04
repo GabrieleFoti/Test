@@ -56,6 +56,7 @@ client.on('guildMemberAdd', (member) => {
       else{
         var channel = results[0].welcome_channel_id
         var welcome_channel = member.guild.channels.cache.get(channel)
+        console.log(results[0].welcome_msg_content)
         if(results[0].welcome_msg_content == null)
             welcome_channel.send(`Welcome, ${member}. (っ◔◡◔)っ`)
         else
