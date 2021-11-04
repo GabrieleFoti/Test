@@ -336,8 +336,13 @@ client.on('message', async message => {
     if(!message.member.permissions.has('MANAGE_GUILD')) return message.reply('you do not have the permission to perform this action.')
     var msg = message.content.split(' ')
     msg.shift()
-    if(msg == undefined) return message.reply("you must specify a message first.")
-    connection.query(`UPDATE Guild SET welcome_msg_content = '${msg}', welcome_channel_id = NULL WHERE guild_id = ${message.guild.id}`, (err) => {
+    if(msg == undefined) connection.query(`UPDATE Guild SET welcome_msg_content = NULL WHERE guild_id = ${message.guild.id}`, (err) => {
+        if(err){ 
+          message.reply('there was an error setting the message, please try again.')
+          console.log(err)
+        }
+    })
+    else connection.query(`UPDATE Guild SET welcome_msg_content = '${msg}', welcome_msg = 1 WHERE guild_id = ${message.guild.id}`, (err) => {
         if(err){ 
           message.reply('there was an error setting the message, please try again.')
           console.log(err)
