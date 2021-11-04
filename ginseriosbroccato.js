@@ -2,7 +2,6 @@ require('dotenv-flow').config()
 const Discord = require('discord.js')
 const client = new Discord.Client()
 const mysql = require('mysql')
-const DBL = require('dblapi.js')
 var prefix = '.'
 var palese = '.'
 const config = {
@@ -13,7 +12,6 @@ const config = {
   database : process.env.database,
   dbltoken : process.env.dbltoken,
 }
-const dbl = new DBL(config.dbltoken, client)
 
 const connection = mysql.createConnection({
 
@@ -48,8 +46,10 @@ client.on('ready', () => {
 })
 
 client.on('guildMemberAdd', (member) => {
+  
   console.log('nuovo membro')
   connection.query(`SELECT welcome_msg, welcome_msg_content, welcome_channel_id, welcome_role, welcome_role_id FROM Guild WHERE guild_id = ${member.guild.id}`, (err, results) => {
+    await resolve(1)
     if(err) console.error(err)
     else {
 
