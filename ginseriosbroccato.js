@@ -340,13 +340,15 @@ client.on('message', async message => {
         if(err){ 
           message.reply('there was an error setting the message, please try again.')
           console.log(err)
-        }
+        }else
+          message.reply('your custom message has been reset.')
     })
     else connection.query(`UPDATE Guild SET welcome_msg_content = '${msg}', welcome_msg = 1 WHERE guild_id = ${message.guild.id}`, (err) => {
         if(err){ 
           message.reply('there was an error setting the message, please try again.')
           console.log(err)
-        }
+        }else
+            message.reply('your custom message has been set')
     })
   }else if(message.content.startsWith(prefix + 'autorole')){
     if(!message.member.permissions.has('MANAGE_GUILD')) return message.reply('you do not have the permission to perform this action.')
