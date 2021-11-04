@@ -48,7 +48,7 @@ client.on('ready', () => {
 })
 
 client.on('guildMemberAdd', (member) => {
-  connection.query(`SELECT welcome_msg, welcome_msg_content welcome_channel_id, welcome_role, welcome_role_id FROM Guild WHERE guild_id = ${member.guild.id}`, (err, results) => {
+  connection.query(`SELECT welcome_msg, welcome_msg_content, welcome_channel_id, welcome_role, welcome_role_id FROM Guild WHERE guild_id = ${member.guild.id}`, (err, results) => {
     if(err) console.error(err)
     else {
 
